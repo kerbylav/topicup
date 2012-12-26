@@ -1,0 +1,1 @@
+{if $LS->ACL_UserCanUpTopic($oUser,$oTopic)}<li><a href="#" class="topicup_link" title="{$aLang.plugin.topicup.link_title}" onclick="ls.topicup.up({$iTopicId}); return false;">{$aLang.plugin.topicup.link_text}</a></li>{/if}
