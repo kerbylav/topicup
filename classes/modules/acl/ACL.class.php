@@ -22,8 +22,11 @@ class PluginTopicup_ModuleACL extends PluginTopicup_Inherit_ModuleACL
         if (!$oUser || !$oTopic)
             return $this->Lang_Get('not_access');
 
-        /*        if ($oUser->isAdministrator())
-                    return true;*/
+        if ($bBriefCheck)
+            return true;
+
+        if ($oUser->isAdministrator())
+            return true;
 
         if (in_array($oUser->getLogin(), Config::Get('plugin.topicup.super_uppers')))
             return true;
