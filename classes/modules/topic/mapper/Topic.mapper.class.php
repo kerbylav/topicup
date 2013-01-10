@@ -54,14 +54,14 @@ class PluginTopicup_ModuleTopic_MapperTopic extends PluginTopicup_Inherit_Module
     {
         $sWhere = parent::buildFilter($aFilter);
 
-        if (!isset($aFilter['ignore_excluded']))
+        if (!isset($aFilter["ignore_excluded"]))
         {
-            $oEngine = Engine::GetInstance();
-            if ($oUser = $oEngine->User_GetUserCurrent())
+            if (isset($aFilter['exclude_topics']))
             {
-                $aList = $oEngine->PluginTopicup_Topicup_GetExcludedTopics($oUser->getId());
-                if (count($aList) > 0)
-                    $sWhere .= " AND topic_id not in (" . join(",", $aList) . ")";
+                if (!is_array($aFilter['exclude_topics']))
+                    $aFilter['exclude_topics'] = array($aFilter['exclude_topics']);
+                if (count($aFilter['exclude_topics']) > 0)
+                    $sWhere .= " AND topic_id not in (" . join(",", $aFilter['exclude_topics']) . ")";
             }
         }
 
