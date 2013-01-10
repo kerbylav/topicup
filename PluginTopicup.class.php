@@ -23,7 +23,7 @@ if (!class_exists('Plugin'))
 class PluginTopicup extends Plugin
 {
 
-    protected $aInherits=array('module'=>array('ModuleTopic','ModuleACL'),'action'=>array('ActionAjax'),'mapper'=>array('ModuleTopic_MapperTopic'));
+    protected $aInherits=array('module'=>array('ModuleTopic','ModuleACL'),'action'=>array('ActionAjax','ActionProfile'),'mapper'=>array('ModuleTopic_MapperTopic'));
 
 
     public function Activate()
@@ -31,6 +31,10 @@ class PluginTopicup extends Plugin
         if (!$this->isTableExists('prefix_topicup_data'))
         {
             $this->ExportSQL(dirname(__FILE__) . '/install.sql');
+        }
+        if (!$this->isTableExists('prefix_topicup_exclude'))
+        {
+            $this->ExportSQL(dirname(__FILE__) . '/update_101.sql');
         }
         return true;
     }

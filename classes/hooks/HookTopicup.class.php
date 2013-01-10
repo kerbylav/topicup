@@ -23,20 +23,37 @@ class PluginTopicup_HookTopicup extends Hook
             return;
 
         $this->AddHook('template_topic_show_info', 'InjectTopicupLink');
+        $this->AddHook('template_profile_sidebar_menu_item_last', 'IncludeMenuProfile');
     }
 
     public function InjectTopicupLink($aParam)
     {
         $this->oUserCurrent = $this->User_GetUserCurrent();
 
-        if ($this->ACL_UserCanUpTopic($this->oUserCurrent, $aParam['topic']) !== true)
-            return;
+        $oTopic=$aParam['topic'];
+        $this->Viewer_Assign('oTopic', $oTopic);
+        $this->Viewer_Assign('iTopicId', $oTopic->getId());
+        
+        $res=$this->Viewer_Fetch(PluginTopicup::GetTemplateFilePath(__CLASS__, 'inject_topicup_link_exclude.tpl'));
+
+        if ($this->ACL_UserCanUpTopic($this->oUserCurrent, $oTopic) !== true)
+            return $res;
 
         $this->Viewer_Assign('oUser', $this->oUserCurrent);
-        $this->Viewer_Assign('oTopic', $aParam['topic']);
-        $this->Viewer_Assign('iTopicId', $aParam['topic']->getId());
-        return $this->Viewer_Fetch(PluginTopicup::GetTemplateFilePath(__CLASS__, 'inject_topicup_link.tpl'));
+        return $this->Viewer_Fetch(PluginTopicup::GetTemplateFilePath(__CLASS__, 'inject_topicup_link.tpl')).$res;
     }
+
+    protected function PrepareMenu()
+    {
+
+    }
+
+    public function IncludeMenuProfile()
+    {
+        $this->PrepareMenu();
+        return $this->Viewer_Fetch(PluginTopicup::GetTemplateFilePath(__CLASS__, 'inject_menu_profile.tpl'));
+    }
+
 }
 
 ?>

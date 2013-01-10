@@ -7,7 +7,7 @@
 		<lang name="default">Alexei Lukin aka Kerby</lang>
 	</author>
 	<homepage>http://kerbystudio.ru</homepage>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<requires>
 		<livestreet>1.0.1</livestreet>
 		<plugins>
@@ -15,6 +15,6 @@
 	</requires>
 	<description>
 		<lang name="default">Moves topic up in new topics feed</lang>
-		<lang name="russian">Поднимает топик "вверх" в ленте топиков, вытаскивая "на свет" незаслуженно забытые записи</lang>
+		<lang name="russian">Поднимает топик "вверх" в ленте топиков, вытаскивая "на свет" незаслуженно забытые записи. Так же дает возможность пользователям исключать записи из лент.</lang>
 	</description>
 </plugin>
