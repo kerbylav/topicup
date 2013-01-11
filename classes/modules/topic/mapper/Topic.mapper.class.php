@@ -71,7 +71,9 @@ class PluginTopicup_ModuleTopic_MapperTopic extends PluginTopicup_Inherit_Module
                 $aFilter['only_include_topics'] = array($aFilter['only_include_topics']);
 
             if (count($aFilter['only_include_topics']) > 0)
-                $sWhere .= " AND topic_id in (" . join(",", $aFilter['only_include_topics']) . ")";
+                $sWhere = " AND topic_id in (" . join(",", $aFilter['only_include_topics']) . ")";
+            else
+                $sWhere=" AND 1=0";
         }
         return $sWhere;
     }
