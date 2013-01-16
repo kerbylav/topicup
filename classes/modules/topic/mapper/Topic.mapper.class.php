@@ -61,7 +61,7 @@ class PluginTopicup_ModuleTopic_MapperTopic extends PluginTopicup_Inherit_Module
                 if (!is_array($aFilter['exclude_topics']))
                     $aFilter['exclude_topics'] = array($aFilter['exclude_topics']);
                 if (count($aFilter['exclude_topics']) > 0)
-                    $sWhere .= " AND topic_id not in (" . join(",", $aFilter['exclude_topics']) . ")";
+                    $sWhere .= " AND t.topic_id not in (" . join(",", $aFilter['exclude_topics']) . ")";
             }
         }
 
@@ -71,7 +71,7 @@ class PluginTopicup_ModuleTopic_MapperTopic extends PluginTopicup_Inherit_Module
                 $aFilter['only_include_topics'] = array($aFilter['only_include_topics']);
 
             if (count($aFilter['only_include_topics']) > 0)
-                $sWhere = " AND topic_id in (" . join(",", $aFilter['only_include_topics']) . ")";
+                $sWhere = " AND t.topic_id in (" . join(",", $aFilter['only_include_topics']) . ")";
             else
                 $sWhere=" AND 1=0";
         }
