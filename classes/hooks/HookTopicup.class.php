@@ -45,12 +45,15 @@ class PluginTopicup_HookTopicup extends Hook
 
     protected function PrepareMenu()
     {
-
     }
 
-    public function IncludeMenuProfile()
+    public function IncludeMenuProfile($aParams)
     {
-        $this->PrepareMenu();
+        if ($aParams['oUserProfile'])
+        {
+            $this->Viewer_Assign('iExcludedTopics',count($this->PluginTopicup_Topicup_GetExcludedTopics($aParams['oUserProfile']->getId())));
+        }
+
         return $this->Viewer_Fetch(PluginTopicup::GetTemplateFilePath(__CLASS__, 'inject_menu_profile.tpl'));
     }
 

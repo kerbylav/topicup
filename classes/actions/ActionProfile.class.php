@@ -73,17 +73,5 @@ class PluginTopicup_ActionProfile extends PluginTopicup_Inherit_ActionProfile
 
         $this->SetTemplate(PluginTopicup::GetTemplateFilePath(__CLASS__, 'actions/ActionProfile/excludedtopics.tpl'));
     }
-
-    public function EventShutdown()
-    {
-        parent::EventShutdown();
-
-        if (!$this->oUserProfile)
-        {
-            return;
-        }
-
-        $this->Viewer_Assign('iExcludedTopics',count($this->PluginTopicup_Topicup_GetExcludedTopics($this->oUserProfile->getId())));
-    }
 }
 ?>
